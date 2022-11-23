@@ -16,11 +16,11 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
-public class AdapterCard extends RecyclerView.Adapter<AdapterCard.ClassViewHolder> {
-     private ArrayList<ModelPahlawan> dataPahlawan;
-     private Context   ctx;
+public class AdapterGrid extends RecyclerView.Adapter<AdapterGrid.ClassViewHolder> {
+    private ArrayList<ModelPahlawan> dataPahlawan;
+    private Context ctx;
 
-    public AdapterCard(ArrayList<ModelPahlawan> dataPahlawan, Context ctx) {
+    public AdapterGrid(ArrayList<ModelPahlawan> dataPahlawan, Context ctx) {
         this.dataPahlawan = dataPahlawan;
         this.ctx = ctx;
     }
@@ -28,20 +28,19 @@ public class AdapterCard extends RecyclerView.Adapter<AdapterCard.ClassViewHolde
     @NonNull
     @Override
     public ClassViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View varView = LayoutInflater.from(ctx).inflate(R.layout.item_card, parent, false);
+        View varView = LayoutInflater.from(ctx).inflate(R.layout.item_grid, parent, false);
         return new ClassViewHolder(varView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ClassViewHolder holder, int position) {
-       ModelPahlawan pahlawan = dataPahlawan.get(position);
-       holder.tvNama.setText(pahlawan.getNama());
-       holder.tvTentang.setText(pahlawan.getTentang());
+        ModelPahlawan pahlawan = dataPahlawan.get(position);
+
         Glide
                 .with(ctx)
                 .load(pahlawan.getFoto())
                 .centerCrop()
-                .into(holder.ivFoto);
+                .into(holder.ivGrid);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,13 +51,13 @@ public class AdapterCard extends RecyclerView.Adapter<AdapterCard.ClassViewHolde
                 xTentang = pahlawan.getTentang();
                 xFoto = pahlawan.getFoto();
 
- //               Log.d("CEKNRICEK", xNama+ " | " + xTentang + " | " + xFoto);
+                //               Log.d("CEKNRICEK", xNama+ " | " + xTentang + " | " + xFoto);
 
-                Intent kirim =new Intent(ctx, DetailActivity.class);
+                Intent kirim = new Intent(ctx, DetailActivity.class);
                 kirim.putExtra("xNama", xNama);
                 kirim.putExtra("xTentang", xTentang);
                 kirim.putExtra("xFoto", xFoto);
-               ctx.startActivity(kirim);
+                ctx.startActivity(kirim);
             }
         });
     }
@@ -69,14 +68,11 @@ public class AdapterCard extends RecyclerView.Adapter<AdapterCard.ClassViewHolde
     }
 
     public class ClassViewHolder extends RecyclerView.ViewHolder {
-       ImageView ivFoto;
-       TextView tvNama, tvTentang;
+        ImageView ivGrid;
 
         public ClassViewHolder(@NonNull View itemView) {
             super(itemView);
-            ivFoto = itemView.findViewById(R.id.iv_foto);
-            tvNama = itemView.findViewById(R.id.tv_nama);
-            tvTentang = itemView.findViewById(R.id.tv_tentang);
+            ivGrid = itemView.findViewById(R.id.iv_grid);
         }
     }
 }
