@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         rvPahlawan.setHasFixedSize(true);
 
         data.addAll(DataPahlawan.ambilDataPahlawan());
-        tampilDataGrid();
+        tampilDataCard();
     }
 
     private void tampilDataCard() {
